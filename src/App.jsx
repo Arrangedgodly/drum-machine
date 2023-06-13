@@ -54,15 +54,17 @@ function App() {
 
   const playSound = (audioId) => {
     const audioElement = document.getElementById(audioId);
-    audioElement.play();
+    if (audioElement) {
+      audioElement.play();
+    }
   };
 
   const handleKeyPress = (event) => {
-    const pressedKey = String.fromCharCode(event.keyCode);
-    const drumPad = drumPads.find((pad) => pad.key === pressedKey);
+    const pressedKeyCode = event.keyCode;
+    const drumPad = drumPads.find((pad) => pad.keyCode === pressedKeyCode);
     if (drumPad) {
       setRecentSound(drumPad.id);
-      playSound(drumPad.id);
+      playSound(drumPad.key);
     }
   };
 
@@ -78,9 +80,15 @@ function App() {
       <div className="drum-container" id="drum-machine">
         <div className="drums">
           {drumPads.map((drumPad) => (
-            <button className="drum-pad" id={drumPad.id} key={drumPad.id} onClick={() => {
-              setRecentSound(drumPad.id);
-              playSound(drumPad.key)}}>
+            <button
+              className="drum-pad"
+              id={drumPad.id}
+              key={drumPad.id}
+              onClick={() => {
+                setRecentSound(drumPad.id);
+                playSound(drumPad.key);
+              }}
+            >
               <audio
                 className="clip"
                 id={drumPad.key}
