@@ -92,7 +92,7 @@ function App() {
               <audio
                 className="clip"
                 id={drumPad.key}
-                src={`./src/audio/${drumPad.id}.mp3`}
+                src={`https://s3.amazonaws.com/freecodecamp/drums/${drumPad.id}.mp3`}
               />
               {drumPad.key}
             </button>
